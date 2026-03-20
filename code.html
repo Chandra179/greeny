@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knowledge Architect | Graph Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#ffdad6",
+              "surface-variant": "#333537",
+              "inverse-on-surface": "#2f3133",
+              "on-secondary-fixed": "#001f2a",
+              "outline": "#8d909d",
+              "on-error": "#690005",
+              "surface-bright": "#38393c",
+              "on-primary-container": "#a0bbff",
+              "primary-fixed": "#d9e2ff",
+              "on-secondary-fixed-variant": "#2e4b57",
+              "on-primary": "#002d6e",
+              "inverse-surface": "#e2e2e5",
+              "on-tertiary": "#00363d",
+              "on-tertiary-fixed": "#001f24",
+              "on-tertiary-fixed-variant": "#004f58",
+              "tertiary-fixed": "#9cf0ff",
+              "surface-container-highest": "#333537",
+              "secondary-container": "#304d5a",
+              "on-surface-variant": "#c3c6d4",
+              "on-secondary": "#163440",
+              "error-container": "#93000a",
+              "tertiary-container": "#00545e",
+              "on-surface": "#e2e2e5",
+              "secondary": "#adcbda",
+              "surface-container-lowest": "#0c0e10",
+              "surface": "#121416",
+              "secondary-fixed": "#c9e7f7",
+              "tertiary": "#00daf3",
+              "primary": "#b0c6ff",
+              "surface-dim": "#121416",
+              "on-tertiary-container": "#00cfe7",
+              "secondary-fixed-dim": "#adcbda",
+              "surface-container": "#1e2022",
+              "tertiary-fixed-dim": "#00daf3",
+              "error": "#ffb4ab",
+              "on-primary-fixed-variant": "#00429b",
+              "background": "#121416",
+              "on-secondary-container": "#9fbdcc",
+              "outline-variant": "#434652",
+              "surface-container-high": "#282a2c",
+              "primary-fixed-dim": "#b0c6ff",
+              "primary-container": "#0047a5",
+              "surface-tint": "#b0c6ff",
+              "on-background": "#e2e2e5",
+              "surface-container-low": "#1a1c1e",
+              "on-primary-fixed": "#001945",
+              "inverse-primary": "#0058ca"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #121416;
+            color: #e2e2e5;
+            overflow: hidden;
+        }
+        .graph-grid {
+            background-image: radial-gradient(circle, #333537 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="font-body">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#121416] flex justify-between items-center px-6 h-16 w-full font-['Space_Grotesk'] tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#b0c6ff] tracking-tighter">Knowledge Architect</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-[#b0c6ff] border-b-2 border-[#b0c6ff] pb-1 transition-colors active:scale-95 duration-200" href="#">Explorer</a>
+<a class="text-[#adcbda] hover:text-[#b0c6ff] transition-colors active:scale-95 duration-200" href="#">Analytics</a>
+<a class="text-[#adcbda] hover:text-[#b0c6ff] transition-colors active:scale-95 duration-200" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-[#1a1c1e] px-3 py-1.5 rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-sm opacity-50">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface" placeholder="Search knowledge base..." type="text"/>
+</div>
+<button class="p-2 hover:bg-[#282a2c] rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#b0c6ff]">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#282a2c] rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#b0c6ff]">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-2 bg-surface-container-high">
+<img alt="User profile" data-alt="Abstract minimalist user profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj-jm3pzdb-1lxQAYmo5uzzyhaNuCivCKxmSrCOeti02Twz-tqvR9Kj2zhsdKzBOXC75BuV-xx8GJW5R2n1kO1NjKEHGs7o0UmUcwi2J1oLEpP0pl9reFOYxDUlPbImYytoEwL7UCl0pBm_ilZyjDuV-iPwvmDoUtxecxdtytTAnNo4WRP1gvwVFwXA13VcmP9fO3XrRzOqrpPu_cgYTA7uwczXRsWLNQ86s3Cs1j85_g7wwf4GuZDqeZYrIEQOmb9uebx2vtZwJbR"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-[#1a1c1e] flex flex-col py-8 px-4 gap-y-4 font-['Inter'] text-sm z-40">
+<div class="mb-6 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h3 class="font-bold text-[#b0c6ff]">Project Alpha</h3>
+<p class="text-[10px] opacity-50 uppercase tracking-widest">Knowledge Base</p>
+</div>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 py-3 px-4 bg-[#282a2c] text-[#b0c6ff] border-l-2 border-[#00daf3] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span>Graph View</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#adcbda] opacity-70 hover:bg-[#333537] hover:opacity-100 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Node Manager</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#adcbda] opacity-70 hover:bg-[#333537] hover:opacity-100 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="schema">schema</span>
+<span>Schema Editor</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#adcbda] opacity-70 hover:bg-[#333537] hover:opacity-100 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>History</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-1">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform mb-4">
+<span class="material-symbols-outlined text-sm">add</span>
+                Connect Node
+            </button>
+<a class="flex items-center gap-3 py-2 px-4 text-[#adcbda] opacity-70 hover:bg-[#333537] hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 py-2 px-4 text-[#adcbda] opacity-70 hover:bg-[#333537] hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Graph Canvas -->
+<main class="ml-64 mt-16 h-[calc(100vh-4rem)] relative graph-grid overflow-hidden bg-surface">
+<!-- Graph Workspace Tools -->
+<div class="absolute top-8 left-8 z-20 flex flex-col gap-3">
+<div class="bg-surface-container-high/80 backdrop-blur-xl p-1.5 rounded-xl flex flex-col gap-1">
+<button class="p-2.5 hover:bg-surface-container-highest rounded-lg transition-colors" title="Zoom In">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="p-2.5 hover:bg-surface-container-highest rounded-lg transition-colors" title="Zoom Out">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="p-2.5 hover:bg-surface-container-highest rounded-lg transition-colors" title="Fit to Screen">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+<div class="bg-surface-container-high/80 backdrop-blur-xl p-1.5 rounded-xl flex flex-col gap-1">
+<button class="p-2.5 text-tertiary hover:bg-surface-container-highest rounded-lg transition-colors" title="Add Entity">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+<button class="p-2.5 text-secondary hover:bg-surface-container-highest rounded-lg transition-colors" title="Add Concept">
+<span class="material-symbols-outlined">category</span>
+</button>
+</div>
+</div>
+<!-- Floating Graph Elements (Mockup) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+<path d="M400,300 L600,200" stroke="#434652" stroke-width="1.5"></path>
+<path d="M400,300 L550,450" stroke="#00daf3" stroke-width="2"></path>
+<path d="M600,200 L800,250" stroke="#434652" stroke-width="1.5"></path>
+<path d="M550,450 L750,420" stroke="#434652" stroke-width="1.5"></path>
+<path d="M600,200 L550,450" stroke="#434652" stroke-dasharray="4" stroke-width="1.5"></path>
+</svg>
+<!-- Nodes -->
+<!-- Circular Entity Node -->
+<div class="absolute top-[280px] left-[380px] group cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border-2 border-primary flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(176,198,255,0.2)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] font-medium tracking-wider text-on-surface-variant uppercase">Core Entity</span>
+</div>
+<!-- Active Rectangular Concept Node -->
+<div class="absolute top-[170px] left-[570px] group cursor-pointer">
+<div class="px-6 py-3 rounded-lg bg-surface-container-highest border border-outline-variant group-hover:bg-primary-container/20 transition-all duration-300">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-headline font-bold text-sm tracking-tight text-secondary">Neural Framework</span>
+</div>
+</div>
+<!-- Contextual Dropdown / Info Panel -->
+<div class="absolute top-14 left-0 w-72 bg-surface-container-highest/90 backdrop-blur-2xl p-6 rounded-xl border border-outline-variant/30 shadow-2xl z-30">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-headline text-lg font-bold text-primary">Concept Details</h4>
+<button class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Architecture</p>
+<p class="text-sm">Transformer-based asynchronous node processing with semantic weighting.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Connections</p>
+<p class="text-lg font-headline font-bold">1,402</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Reliability</p>
+<p class="text-lg font-headline font-bold text-tertiary">98.4%</p>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex gap-2">
+<button class="flex-1 py-1.5 rounded bg-surface-container-low text-[11px] font-bold hover:bg-surface-container-high transition-colors">EDIT SCHEMA</button>
+<button class="flex-1 py-1.5 rounded bg-primary text-on-primary text-[11px] font-bold hover:opacity-90 transition-colors">EXPAND GRAPH</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Entity Node (Tertiary) -->
+<div class="absolute top-[430px] left-[530px] group cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-low border border-tertiary flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(0,218,243,0.1)]">
+<span class="material-symbols-outlined text-lg">database</span>
+</div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] font-medium tracking-wider text-on-surface-variant uppercase">Data Source A</span>
+</div>
+<!-- Metadata Panel (Right Side) -->
+<div class="absolute top-8 right-8 w-80 h-[calc(100%-4rem)] bg-surface-container-low/60 backdrop-blur-md rounded-2xl flex flex-col p-6 shadow-2xl z-20">
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-1 h-4 bg-tertiary rounded-full"></div>
+<h2 class="font-headline text-xl font-bold tracking-tight">Graph Metrics</h2>
+</div>
+<p class="text-xs text-on-surface-variant">Real-time analysis of the current knowledge workspace cluster.</p>
+</div>
+<div class="space-y-6">
+<!-- Bento Stat Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-high p-4 rounded-xl border border-outline-variant/10">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Nodes</span>
+<div class="text-2xl font-headline font-bold mt-1 text-primary">842</div>
+</div>
+<div class="bg-surface-container-high p-4 rounded-xl border border-outline-variant/10">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Edges</span>
+<div class="text-2xl font-headline font-bold mt-1 text-secondary">3.1k</div>
+</div>
+</div>
+<!-- Detailed List -->
+<div class="space-y-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Recent Activity</h3>
+<div class="flex items-start gap-3 group">
+<div class="mt-1 w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#00daf3]"></div>
+<div>
+<p class="text-sm font-medium">Concept "Neural" merged</p>
+<p class="text-[10px] text-on-surface-variant">2 mins ago • User: Arch_01</p>
+</div>
+</div>
+<div class="flex items-start gap-3 group">
+<div class="mt-1 w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#adcbda]"></div>
+<div>
+<p class="text-sm font-medium">New edge validation</p>
+<p class="text-[10px] text-on-surface-variant">14 mins ago • System Auto</p>
+</div>
+</div>
+<div class="flex items-start gap-3 group">
+<div class="mt-1 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#b0c6ff]"></div>
+<div>
+<p class="text-sm font-medium">Schema v2.4 deployed</p>
+<p class="text-[10px] text-on-surface-variant">1 hour ago • User: Arch_01</p>
+</div>
+</div>
+</div>
+<!-- Dynamic Chart Placeholder -->
+<div class="mt-auto pt-6 border-t border-outline-variant/20">
+<div class="h-32 w-full bg-surface-container-lowest rounded-xl flex items-end justify-between p-4 gap-1.5 overflow-hidden">
+<div class="bg-primary/20 w-full rounded-t-sm" style="height: 40%"></div>
+<div class="bg-primary/40 w-full rounded-t-sm" style="height: 60%"></div>
+<div class="bg-primary/60 w-full rounded-t-sm" style="height: 55%"></div>
+<div class="bg-primary/80 w-full rounded-t-sm" style="height: 85%"></div>
+<div class="bg-primary w-full rounded-t-sm" style="height: 70%"></div>
+<div class="bg-tertiary w-full rounded-t-sm" style="height: 95%"></div>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant mt-2 px-1">
+<span>08:00</span>
+<span>Complexity Index</span>
+<span>16:00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Controls Bar -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 bg-surface-container-highest/60 backdrop-blur-xl px-6 py-3 rounded-full border border-outline-variant/20 shadow-2xl z-20">
+<div class="flex items-center gap-4 pr-6 border-r border-outline-variant/30">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">filter_alt</span>
+<span class="text-xs font-bold uppercase tracking-wider">Filters</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">layers</span>
+<span class="text-xs font-bold uppercase tracking-wider">Layers</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mr-2">Mode:</span>
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary text-xs font-bold">INTERACTIVE</button>
+<button class="px-4 py-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant text-xs font-bold transition-colors">SIMULATION</button>
+<button class="px-4 py-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant text-xs font-bold transition-colors">EDIT</button>
+</div>
+</div>
+</main>
+</body></html>
